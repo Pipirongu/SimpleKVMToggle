@@ -201,7 +201,7 @@ namespace SimpleKVM.GUI.Rules
                     originalSources
                         .ForEach(originalSources =>
                         {
-                            originalSources.Monitor.SetSource(originalSources.OriginalSource);
+                            originalSources.Monitor.SetSource(originalSources.OriginalSource, originalSources.OriginalSource);
                         });
                 }, TaskCreationOptions.LongRunning);
             }

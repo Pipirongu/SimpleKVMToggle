@@ -17,6 +17,6 @@ namespace SimpleKVM.Displays
         [JsonIgnore]
         public readonly List<int> ValidSources = validSources;
 
-        public abstract bool SetSource(int newSourceId);
+        public abstract bool SetSource(int newSourceId, int secondSourceId);
     }
 }

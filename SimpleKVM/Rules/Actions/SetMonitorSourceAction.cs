@@ -10,11 +10,13 @@ namespace SimpleKVM.Rules.Actions
     {
         public Monitor Monitor;
         public int SetMonitorSourceIdTo;
+        public int SetMonitorSourceIdTo2;
 
-        public SetMonitorSourceAction(Monitor monitor, int sourceId)
+        public SetMonitorSourceAction(Monitor monitor, int sourceId, int secondSourceId)
         {
             Monitor = monitor;
             SetMonitorSourceIdTo = sourceId;
+            SetMonitorSourceIdTo2 = secondSourceId;
         }
 
         public bool IsValid()
@@ -27,7 +29,7 @@ namespace SimpleKVM.Rules.Actions
         {
             if (SetMonitorSourceIdTo == -1) return false;
 
-            var result = Monitor.SetSource(SetMonitorSourceIdTo);
+            var result = Monitor.SetSource(SetMonitorSourceIdTo, SetMonitorSourceIdTo2);
             return result;
         }
     }

@@ -47,9 +47,11 @@ namespace SimpleKVM.GUI.Actions
                                     .Select(monitor =>
                                     {
                                         int sourceIdToSelect;
+                                        int secondSourceIdToSelect;
                                         if (ruleToEdit == null)
                                         {
                                             sourceIdToSelect = monitor.Monitor.GetCurrentSource();
+                                            secondSourceIdToSelect = monitor.Monitor.GetCurrentSource();
                                         }
                                         else
                                         {
@@ -62,10 +64,11 @@ namespace SimpleKVM.GUI.Actions
 
 
                                             sourceIdToSelect = setMonitorAction?.SetMonitorSourceIdTo ?? -1;
+                                            secondSourceIdToSelect = setMonitorAction.SetMonitorSourceIdTo2;
                                         }
 
                                         var uc = new UcSelectMonitorSource();
-                                        uc.DisplayMonitor(monitor.AutogenName, monitor.Monitor, sourceIdToSelect);
+                                        uc.DisplayMonitor(monitor.AutogenName, monitor.Monitor, sourceIdToSelect, secondSourceIdToSelect);
                                         uc.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
                                         uc.Width = panel1.Width;
 

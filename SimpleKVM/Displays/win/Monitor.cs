@@ -29,7 +29,7 @@ namespace SimpleKVM.Displays.win
 
         //public static string ControlMyMonitorExe => Path.Combine(AppDomain.CurrentDomain.BaseDirectory ?? "", @"ext\win\controlmymonitor\ControlMyMonitor.exe");
 
-        public override bool SetSource(int newSourceId)
+        public override bool SetSource(int newSourceId, int secondSourceId)
         {
             /*
             var monitorListCommand = new ProcessStartInfo
@@ -47,11 +47,19 @@ namespace SimpleKVM.Displays.win
                 if (physicalMonitor.UniqueId == MonitorUniqueId)
                 {
                     physicalMonitor.PhysicalMonitor.GetVCPRegister(0x60, out uint currentSource);
+                    uint bogus = 4864;
 
-                    if (newSourceId != currentSource)
+                    if (newSourceId == secondSourceId)
                     {
-                        physicalMonitor.PhysicalMonitor.SetVCPRegister(0x60, (uint)newSourceId);
-                        result = true;
+                        physicalMonitor.PhysicalMonitor.SetVCPRegister(0x60, (uint)newSourceId); // TODO force change to newSourceId
+                    }
+                    else if (currentSource == bogus + newSourceId)
+                    {
+                        physicalMonitor.PhysicalMonitor.SetVCPRegister(0x60, (uint)secondSourceId); // TODO change to secondary source
+                    }
+                    else if(currentSource == bogus + secondSourceId) // TODO check with secondary source
+                    {
+                        physicalMonitor.PhysicalMonitor.SetVCPRegister(0x60, (uint)newSourceId); // TODO change to new source
                     }
                 }
             });
